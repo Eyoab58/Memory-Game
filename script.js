@@ -65,6 +65,18 @@ function stopTone(){
     g.gain.setTargetAtTime(0,context.currentTime + 0.05,0.025)
     tonePlaying = false
 }
+
+
+//Page Initialization
+// Init Sound Synthesizer
+var context = new AudioContext()
+var o = context.createOscillator()
+var g = context.createGain()
+g.connect(context.destination)
+g.gain.setValueAtTime(0,context.currentTime)
+o.connect(g)
+o.start(0)
+
 function lightButton(btn){
   document.getElementById("button"+btn).classList.add("lit")
 }
@@ -84,14 +96,14 @@ function playClueSequence(){
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
-    clueHoldTime -= 30
+    clueHoldTime -= 15;
     delay += clueHoldTime 
     delay += cluePauseTime; 
   }
   
 }
 function loseGame(){
-  if(mistakes >= 3){
+  if(mistakes = 3){
     stopGame();
     alert("Game Over. You lost.");
   }
@@ -137,13 +149,5 @@ function random (pattern){
 
 
 
-//Page Initialization
-// Init Sound Synthesizer
-var context = new AudioContext()
-var o = context.createOscillator()
-var g = context.createGain()
-g.connect(context.destination)
-g.gain.setValueAtTime(0,context.currentTime)
-o.connect(g)
-o.start(0)
+
 
